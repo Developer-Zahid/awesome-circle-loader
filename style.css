@@ -1,0 +1,132 @@
+:root {
+  --color-bg: #efefe6;
+  --color-circle--1: #aac3cd;
+  --color-circle--2: #fcac14;
+  --color-circle--3: #8b3bdb;
+  --color-circle--4: #f83d0c;
+  --animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
+  --animation-duration--round: 3s;
+  --animation-duration--popout--outer: calc(var(--animation-duration--round) * 6);
+  --animation-duration--popout--inner: calc(var(--animation-duration--popout--outer) / 5);
+  --animation-play-state: paused;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.preloader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  font-size: 10px;
+  background-color: var(--color-bg);
+  overflow: hidden;
+}
+.preloader--loaded {
+  --animation-play-state: running;
+}
+.preloader__main {
+  transform: scale(0.5);
+  -webkit-animation: popout--outer var(--animation-duration--popout--outer) var(--animation-timing-function) forwards;
+          animation: popout--outer var(--animation-duration--popout--outer) var(--animation-timing-function) forwards;
+  -webkit-animation-play-state: var(--animation-play-state);
+          animation-play-state: var(--animation-play-state);
+}
+.preloader__main__block {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-animation: round var(--animation-duration--round) linear infinite;
+          animation: round var(--animation-duration--round) linear infinite;
+}
+.preloader__main__block__circle {
+  position: absolute;
+  width: 10em;
+  height: 10em;
+  border-radius: 50%;
+  transform: rotate(calc(var(--position) * 30deg));
+}
+.preloader__main__block__circle::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  transform: translateY(-50%);
+}
+.preloader__main__block__circle:nth-child(1)::before {
+  background-color: var(--color-circle--1);
+}
+.preloader__main__block__circle:nth-child(2)::before {
+  background-color: var(--color-circle--2);
+}
+.preloader__main__block__circle:nth-child(3)::before {
+  background-color: var(--color-circle--3);
+}
+.preloader__main__block__circle:nth-child(4)::before {
+  background-color: var(--color-circle--4);
+  -webkit-animation: popout--inner var(--animation-duration--popout--inner) var(--animation-duration--round) forwards;
+          animation: popout--inner var(--animation-duration--popout--inner) var(--animation-duration--round) forwards;
+  -webkit-animation-play-state: var(--animation-play-state);
+          animation-play-state: var(--animation-play-state);
+}
+
+@-webkit-keyframes popout--outer {
+  0% {
+    transform: scale(0.5);
+  }
+  100% {
+    transform: scale(100);
+  }
+}
+
+@keyframes popout--outer {
+  0% {
+    transform: scale(0.5);
+  }
+  100% {
+    transform: scale(100);
+  }
+}
+@-webkit-keyframes popout--inner {
+  0% {
+    transform: scale(1) translateY(-50%);
+  }
+  30% {
+    transform: scale(50) translateY(0);
+  }
+  100% {
+    transform: scale(1000) translateY(0);
+  }
+}
+@keyframes popout--inner {
+  0% {
+    transform: scale(1) translateY(-50%);
+  }
+  30% {
+    transform: scale(50) translateY(0);
+  }
+  100% {
+    transform: scale(1000) translateY(0);
+  }
+}
+@-webkit-keyframes round {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes round {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}/*# sourceMappingURL=style.css.map */
